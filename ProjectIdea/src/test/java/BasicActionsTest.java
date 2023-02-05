@@ -1,7 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
@@ -24,7 +21,14 @@ public class BasicActionsTest {
         WebElement userNameInput = driver.findElement(By.name("username"));
         userNameInput.clear();
         userNameInput.sendKeys("admin");
-        userNameInput.sendKeys(Keys.TAB);
+
+        //pobranie wartości z pola tekstowego
+        System.out.println(userNameInput.getAttribute("value"));
+        userNameInput.sendKeys(Keys.ENTER);
+        Alert firstAlert = driver.switchTo().alert();
+        firstAlert.accept();
+        driver.switchTo().alert().accept();
+        //userNameInput.sendKeys(Keys.TAB);
 
         driver.findElement(By.cssSelector("[type='checkbox']")).click();
         driver.findElement(By.cssSelector("[value='male']")).click();
@@ -46,6 +50,14 @@ public class BasicActionsTest {
         SelectCheck selectCheck = new SelectCheck();
         System.out.println(selectCheck.checkOption("Audi", selectCar));
         System.out.println(selectCheck.checkOption("Jeep", selectCar));
+
+
+        WebElement para = driver.findElement(By.xpath("//p[@class='topSecret']"));
+        System.out.println("by text: "+para.getText());
+        System.out.println("by attr value: "+para.getAttribute("value"));
+        System.out.println("by attr text content: "+para.getAttribute("textContent"));
+
+
         //driver.quit();
     }
 }
