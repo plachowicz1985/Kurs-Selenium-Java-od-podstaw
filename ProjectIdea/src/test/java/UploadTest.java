@@ -4,6 +4,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -27,13 +28,15 @@ public class UploadTest {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File before = screenshot.getScreenshotAs(OutputType.FILE);
 
-        String fileName = "screenshot" + randomNumber;
+        String fileName = "screenshot_" + randomNumber;
         //kopiujemy naszego screenshota do nowego pliku do znanej nam sciezki
         FileUtils.copyFile(before, new File("src/test/resources/"+fileName));
 
         driver.findElement(By.id("myFile")).sendKeys("/Users/piotrek/Downloads/CV_Piotr_Lachowicz.pdf");
 
+        Actions actions = new Actions(driver);
+        actions.contextClick(driver.findElement(By.id("myFile"))).perform();
 
-        driver.quit();
+        //driver.quit();
     }
 }
