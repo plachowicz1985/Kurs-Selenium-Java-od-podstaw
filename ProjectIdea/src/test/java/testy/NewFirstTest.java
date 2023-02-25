@@ -23,7 +23,8 @@ public class NewFirstTest extends BaseTest {
     @Test
     public void firstTest() {
 
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
+
         driver.get("https://testeroprogramowania.github.io/selenium/wait2.html");
         driver.findElement(By.id("clickOnMe")).click();
         waitForElementExist(By.cssSelector("p"));
@@ -39,9 +40,11 @@ public class NewFirstTest extends BaseTest {
         softAssert.assertFalse(para.getText().startsWith("Pojawiłem"));
         softAssert.assertEquals(para.getText(), "Dopiero się", "Druga asercja");
 
+        softAssert.assertAll();
+
         driver.quit();
 
-        softAssert.assertAll();
+
     }
 
     @Test @Ignore
